@@ -1,0 +1,15 @@
+<form method="post">
+	{% csrf_token %}
+	{% for field in form %}
+	<div class="form-group">
+		{% if field.label %}
+			{{ field.label }}
+		{% endif %}
+		{{ field }}
+		{% if field.choices %}
+			{{ field.choices }}
+		{% endif %}
+	</div>
+	{% endfor %}
+	<button type="submit">Calculate</button>
+</form>

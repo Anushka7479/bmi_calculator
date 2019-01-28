@@ -77,7 +77,7 @@ class Bmi(models.Model):
 	person = models.ForeignKey(Person,on_delete=models.CASCADE)
 	height_meter = models.DecimalField(max_digits=10,decimal_places=2,validators=[MinValueValidator(1)])
 	weight_kilogram = models.DecimalField(max_digits=10,decimal_places=2,validators=[MinValueValidator(1)])
-	bmi = models.CharField(max_length=255)
+	bmi = models.DecimalField(max_digits=10,decimal_places=2,blank=True)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 
@@ -87,3 +87,7 @@ class Bmi(models.Model):
 	def save(self,*args,**kwargs):
 		self.bmi = self.weight_kilogram / (self.height_meter**2)
 		super().save(*args,**kwargs)
+
+	@staticmethod
+	def calculate_bmi(height_in_meter,weight_in_kilogram):
+		return weight_in_kilogram / (height_in_meter**2)

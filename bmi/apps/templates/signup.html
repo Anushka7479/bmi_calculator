@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Signup</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h4>Register Here</h4>
+			</div>
+			<div class="card-body">
+				<form method="post">
+					{% csrf_token %}
+					{% for field in form %}
+						<div class="form-group">
+							{{ field.errors }}
+							{{ field.label_tag }}
+							{{ field }}
+							{% if field.help_text %}
+								<p class="help">{{ field.help_text|safe }}</p>
+							{% endif %}
+						</div>
+					{% endfor %}
+					<button class="btn btn-info" type="submit">Sign Up</button>
+				</form>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>
